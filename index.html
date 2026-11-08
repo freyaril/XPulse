@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="XPulse turns training into a game. Log workouts, earn XP and coins, rank up every muscle group and show off your profile.">
+    <meta name="theme-color" content="#230035">
+    <meta property="og:title" content="XPulse | Level Up Your Workout">
+    <meta property="og:description" content="XPulse turns training into a game. Log workouts, earn XP and coins, rank up every muscle group and show off your profile.">
+    <meta property="og:type" content="website">
+    <title>XPulse | Level Up Your Workout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="spa-body">
+
+    <!-- View: landing -->
+    <div class="view landing-body" id="view-landing" data-view="landing" data-title="XPulse | Level Up Your Workout">
+        <!-- Hero -->
+        <header class="hero-section">
+            <!-- Top bar -->
+            <nav class="navbar" aria-label="Main navigation">
+                <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+                <!-- changed from sign up/login to just Log In -->
+                <a href="#login" class="nav-login">Log In</a>
+            </nav>
+
+            <!-- Hero text and button -->
+            <section class="hero-content">
+                <h1>Level up your workout.</h1>
+                <p>Track workouts. Earn XP. Level up.</p>
+                <a href="#register" class="cta-button">Lvl Up Now!</a>
+            </section>
+        </header>
+
+        <!-- Features -->
+        <main class="features-section">
+            <h2 class="visually-hidden">What you can do with XPulse</h2>
+            <section class="features-grid">
+                <!-- Track progress -->
+                <article class="feature-card">
+                    <div class="feature-visual" role="img" aria-label="Exercise logging preview">
+                        <img src="images/landing-page/track-progress.png" alt="Exercise logging preview">
+                    </div>
+                    <h3>Track Progress.</h3>
+                    <p>Log your workouts and watch your stats improve over time.</p>
+                </article>
+
+                <!-- Rank up -->
+                <article class="feature-card">
+                    <div class="feature-visual" role="img" aria-label="Rank badge">
+                        <img src="images/landing-page/rank-up.png" alt="Rank badge">
+                    </div>
+                    <h3>Rank Up.</h3>
+                    <p>Track your strength rank across every muscle group.</p>
+                </article>
+
+                <!-- Earn XP and coins -->
+                <article class="feature-card">
+                    <div class="feature-visual" role="img" aria-label="Reward store preview">
+                        <img src="images/landing-page/gain-xp-coin.png" alt="Reward store preview">
+                    </div>
+                    <h3>Earn XP and Coins</h3>
+                    <p>Redeem in-game items and for partnered product discounts.</p>
+                </article>
+
+                <!-- Flex your profile -->
+                <article class="feature-card">
+                    <div class="feature-visual" role="img" aria-label="Profile preview">
+                        <img src="images/landing-page/flex-profile.png" alt="Profile preview">
+                    </div>
+                    <h3>Flex Your Profile.</h3>
+                    <p>Show off your achievements and stats in one place.</p>
+                </article>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>&copy; 2026 XPulse &middot; Fitness made simple.</p>
+        </footer>
+    </div>
+
+    <!-- View: login -->
+    <div class="view auth-body" id="view-login" data-view="login" data-title="XPulse | Log In" hidden>
+        <!-- Logo bar -->
+        <header class="auth-header">
+            <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+        </header>
+
+        <main class="auth-container">
+            <!-- Login form -->
+            <section class="auth-card auth-card--login" aria-labelledby="loginTitle">
+                <h1 id="loginTitle">Log In</h1>
+                <form class="auth-form" id="loginForm" novalidate>
+                    <div class="form-group">
+                        <label for="loginId">Username/Email Address</label>
+                        <input type="text" id="loginId" autocomplete="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPass">Password</label>
+                        <input type="password" id="loginPass" autocomplete="current-password" required>
+                    </div>
+
+                    <p class="form-error" role="alert" hidden></p>
+
+                    <button type="submit" class="submit-btn">Log In</button>
+
+                    <div class="auth-footer-link">
+                        <a href="#register">Don't have an account? Sign up instead</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- View: register -->
+    <div class="view auth-body" id="view-register" data-view="register" data-title="XPulse | Create Account" hidden>
+        <!-- Logo bar -->
+        <header class="auth-header">
+            <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+        </header>
+
+        <main class="auth-container">
+            <!-- Register form -->
+            <section class="auth-card auth-card--register" aria-labelledby="registerTitle">
+                <h1 id="registerTitle">Create Account</h1>
+                <form class="auth-form" id="registerForm" novalidate>
+                    <div class="form-group">
+                        <label for="regUsername">Athlete Username</label>
+                        <input type="text" id="regUsername" autocomplete="username" maxlength="20" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regEmail">Email Address</label>
+                        <input type="email" id="regEmail" autocomplete="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regPass">Password</label>
+                        <input type="password" id="regPass" autocomplete="new-password" minlength="6" required>
+                    </div>
+
+                    <p class="form-error" role="alert" hidden></p>
+
+                    <button type="submit" class="submit-btn">Create Account</button>
+
+                    <div class="auth-footer-link">
+                        <a href="#login">Already registered? Log in instead</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- View: onboard -->
+    <div class="view auth-body" id="view-onboard" data-view="onboard" data-title="XPulse | Personalize Your Experience" hidden>
+        <!-- Logo bar -->
+        <header class="auth-header">
+            <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+        </header>
+
+        <!-- Personalize -->
+        <main class="onboard-container">
+            <h1 class="onboard-title">Let&rsquo;s personalize your experience.</h1>
+
+            <!-- Personalize form -->
+            <form class="onboard-form" id="onboardForm" novalidate>
+                <!-- Gender -->
+                <fieldset class="field-block">
+                    <legend class="field-label">Gender Identity</legend>
+                    <div class="pill-group">
+                        <label class="pill-option">
+                            <input type="radio" name="sex" value="male" checked>
+                            <span class="pill-btn">Male</span>
+                        </label>
+                        <label class="pill-option">
+                            <input type="radio" name="sex" value="female">
+                            <span class="pill-btn">Female</span>
+                        </label>
+                        <label class="pill-option">
+                            <input type="radio" name="sex" value="other">
+                            <span class="pill-btn">Other</span>
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="field-block">
+                    <!-- REMADE BY TRIO: Height in cm only (inches removed) with human limits (50cm-260cm) -->
+                    <div class="label-with-toggle">
+                        <label class="field-label-text" for="userHeight">Height</label>
+                        <div class="unit-toggle" data-unit-group="height" role="group" aria-label="Height unit">
+                            <button type="button" class="unit-btn active" data-unit="cm" aria-pressed="true">cm</button>
+                        </div>
+                    </div>
+                    <input type="number" id="userHeight" class="onboard-input" placeholder="cm" min="50" max="260" step="any" required>
+                </div>
+
+                <div class="field-block">
+                    <!-- REMADE BY TRIO: Weight in kg only (lbs removed) with human limits (20kg-350kg) -->
+                    <div class="label-with-toggle">
+                        <label class="field-label-text" for="userWeight">Weight</label>
+                        <div class="unit-toggle" data-unit-group="weight" role="group" aria-label="Weight unit">
+                            <button type="button" class="unit-btn active" data-unit="kg" aria-pressed="true">kg</button>
+                        </div>
+                    </div>
+                    <input type="number" id="userWeight" class="onboard-input" placeholder="kg" min="20" max="350" step="any" required>
+                </div>
+
+                <p class="form-error" role="alert" hidden></p>
+
+                <!-- Next / back buttons -->
+                <div class="action-buttons">
+                    <button type="submit" class="next-btn">Next Step</button>
+                    <a href="#register" class="back-btn">Back</a>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- View: objective -->
+    <div class="view auth-body" id="view-objective" data-view="objective" data-title="XPulse | Your Objective" hidden>
+        <!-- Logo bar -->
+        <header class="auth-header">
+            <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+        </header>
+
+        <!-- Objective -->
+        <main class="objective-container">
+            <h1 class="objective-title">What is your objective?</h1>
+
+            <form class="objective-form" id="objectiveForm">
+                <!-- Objective choices -->
+                <div class="cards-grid">
+                    <label class="objective-card-label">
+                        <input type="radio" name="objective" value="lose-weight" checked>
+                        <div class="objective-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/goals/lose-weight.png") -->
+                                <img src="images/objective/lose-weight.png" alt="Lose Weight">
+                            </div>
+                            <h2 class="card-title">Lose Weight</h2>
+                        </div>
+                    </label>
+                    <label class="objective-card-label">
+                        <input type="radio" name="objective" value="gain-strength">
+                        <div class="objective-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/goals/gain-strength.png") -->
+                                <img src="images/objective/gain-strength.png" alt="Gain Strength">
+                            </div>
+                            <h2 class="card-title">Gain Strength</h2>
+                        </div>
+                    </label>
+                    <label class="objective-card-label">
+                        <input type="radio" name="objective" value="gain-muscle">
+                        <div class="objective-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/goals/gain-muscle.png") -->
+                                <img src="images/objective/gain-muscle.png" alt="Gain Muscle">
+                            </div>
+                            <h2 class="card-title">Gain Muscle</h2>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Next / back buttons -->
+                <div class="action-buttons objective-actions">
+                    <button type="submit" class="next-btn">Next Step</button>
+                    <a href="#onboard" class="back-btn">Back</a>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- View: splits -->
+    <div class="view auth-body" id="view-splits" data-view="splits" data-title="XPulse | Splits and Frequency" hidden>
+        <!-- Logo bar -->
+        <header class="auth-header">
+            <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+        </header>
+
+        <!-- Splits -->
+        <main class="splits-container">
+            <h1 class="splits-title">Splits and Frequency</h1>
+
+            <form class="splits-form" id="splitsForm">
+                <!-- Split choices -->
+                <div class="splits-grid">
+                    <label class="split-card-label">
+                        <input type="radio" name="split" value="full-body">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/full-body.png") -->
+                                <img src="images/splits/3-day.png" alt="Whole Body">
+                            </div>
+                            <h2 class="split-name">Whole Body</h2>
+                            <span class="split-detail">3-Day Split</span>
+                        </div>
+                    </label>
+                    <label class="split-card-label">
+                        <input type="radio" name="split" value="upper-lower">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/upper-lower.png") -->
+                                <img src="images/splits/4-day.png" alt="Upper/Lower">
+                            </div>
+                            <h2 class="split-name">Upper/Lower</h2>
+                            <span class="split-detail">4-Day Split</span>
+                        </div>
+                    </label>
+                    <label class="split-card-label">
+                        <input type="radio" name="split" value="ppl-hybrid" checked>
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/hybrid.png") -->
+                                <img src="images/splits/5-day.png" alt="Push, Pull, Legs + Upper/Lower Hybrid">
+                            </div>
+                            <h2 class="split-name">Push, Pull, Legs + Upper/Lower Hybrid</h2>
+                            <span class="split-detail">5-Day Split</span>
+                            <span class="split-badge">(Recommended)</span>
+                        </div>
+                    </label>
+                    <label class="split-card-label">
+                        <input type="radio" name="split" value="ppl">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/ppl.png") -->
+                                <img src="images/splits/6-day.png" alt="Push, Pull, Legs">
+                            </div>
+                            <h2 class="split-name">Push, Pull, Legs</h2>
+                            <span class="split-detail">6-Day Split</span>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Next / back buttons -->
+                <div class="action-buttons splits-actions">
+                    <button type="submit" class="next-btn">Next Step</button>
+                    <a href="#objective" class="back-btn">Back</a>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- View: complete -->
+    <div class="view auth-body" id="view-complete" data-view="complete" data-title="XPulse | You're All Set" hidden>
+        <!-- Logo bar -->
+        <header class="auth-header">
+            <a href="#landing" class="logo" aria-label="XPulse home">
+                <span class="xp">XP</span><span class="ulse">ULSE</span>
+            </a>
+        </header>
+
+        <!-- Complete -->
+        <main class="complete-container">
+            <section class="complete-content">
+                <h1 class="complete-title">You&rsquo;re all set!</h1>
+                <p class="complete-subtitle">Your personalized regimen and progression dashboard are prepared.</p>
+                <a href="dashboard.html" class="continue-btn">Continue</a>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

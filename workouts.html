@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log your sets, weights and reps, swap exercises and see recommended foods for your training day.">
+    <meta name="theme-color" content="#230035">
+    <meta property="og:title" content="XPulse | Workout">
+    <meta property="og:description" content="Log your sets, weights and reps, swap exercises and see recommended foods for your training day.">
+    <meta property="og:type" content="website">
+    <title>XPulse | Workout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body" data-page="workouts">
+    <!-- Top navigation -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="logo" aria-label="XPulse dashboard">
+            <span class="xp">XP</span><span class="ulse">ULSE</span>
+        </a>
+
+        <nav class="dashboard-nav" aria-label="Main navigation">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="workouts.html" class="nav-link active" aria-current="page">Workout</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="profile.html" class="profile-avatar-btn" aria-label="Profile">
+                <div class="avatar-circle"></div>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Page title -->
+    <section class="dashboard-title-bar">
+        <div class="dashboard-title-container">
+            <h1>Workout</h1>
+            <p>Log today&rsquo;s sessions and track your gains.</p>
+        </div>
+    </section>
+
+    <!-- Purple strip -->
+    <div class="dashboard-substrip"></div>
+
+    <!-- Workout content -->
+    <main class="workout-content" data-requires-auth>
+        <!-- Goal -->
+        <section class="goal-header">
+            <h2>
+                Your goal is to <span class="highlight-goal" id="userGoalText"></span>
+                <!-- ADDED BY TRIO: Change goal button -->
+                <button type="button" class="change-plan-btn" id="openGoalModalBtn" aria-label="Change goal">Change</button>
+            </h2>
+        </section>
+
+        <!-- Today's workout cards -->
+        <section class="workouts-carousel-section" aria-labelledby="dayHeading">
+            <div class="carousel-title-row">
+                <h3 id="dayHeading">Workouts (for <span id="dayLabel"></span>)</h3>
+                <!-- ADDED BY TRIO: Change split button -->
+                <button type="button" class="change-plan-btn" id="openSplitModalBtn" aria-label="Change split">Change</button>
+                <button type="button" class="calendar-icon" id="openScheduleBtn" aria-label="View weekly schedule" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></button>
+                <!-- ADDED BY TRIO: restore default workouts button -->
+                <button type="button" class="restore-default-btn" id="restoreDefaultBtn" title="Restore default 4 exercises">Restore Defaults</button>
+            </div>
+
+            <div class="workout-cards-row" id="workoutCardsRow">
+                <div class="exercise-card add-card">
+                    <button type="button" class="add-exercise-btn" id="openAddModalBtn" aria-label="Add exercise" aria-haspopup="dialog">
+                        <span class="plus-circle">+</span>
+                    </button>
+                    <h4>Add more!</h4>
+                </div>
+            </div>
+        </section>
+
+        <hr class="workout-divider">
+
+        <!-- Logging and foods -->
+        <section class="workout-bottom-grid">
+            <!-- Exercise logging (drawn by script) -->
+            <div class="logging-column">
+                <h3 class="panel-heading">Exercise Logging</h3>
+                <div class="logging-card" id="loggingCardContainer">
+                    <div class="empty-logging-prompt">
+                        <p>No exercise selected yet.</p>
+                        <span>Click <strong>Add more!</strong> above to choose an exercise to log.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended foods -->
+            <div class="foods-column">
+                <h3 class="panel-heading">Recommended Foods</h3>
+                <div class="foods-card" id="foodsCard">
+                    <div class="empty-logging-prompt">
+                        <p>No recommended foods yet.</p>
+                        <span>Meal ideas for your training day will appear here.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add-exercise popup -->
+    <div class="modal-backdrop" id="addWorkoutModal" aria-hidden="true" hidden>
+        <div class="add-workout-card" role="dialog" aria-modal="true" aria-labelledby="modalSectionTitle">
+            <button type="button" class="modal-close-btn" id="closeAddModalBtn" aria-label="Close">&times;</button>
+
+            <div class="modal-search-row">
+                <label class="visually-hidden" for="exerciseSearchInput">Search exercises</label>
+                <input type="text" class="modal-search-input" id="exerciseSearchInput" placeholder="Search" autocomplete="off">
+                <label class="visually-hidden" for="exerciseCategory">Muscle group</label>
+                <select class="modal-category-pill" id="exerciseCategory">
+                    <option value="chest">Chest</option>
+                    <option value="back">Back</option>
+                    <option value="shoulders">Shoulders</option>
+                    <option value="arms">Arms</option>
+                    <option value="legs">Legs</option>
+                </select>
+            </div>
+
+            <span class="modal-subtitle">Add more to your workout</span>
+            <h3 class="modal-section-title" id="modalSectionTitle">Chest</h3>
+
+            <div class="add-exercises-grid" id="exerciseGrid"></div>
+            <p class="modal-empty" id="exerciseEmpty" hidden>No exercises match your search.</p>
+        </div>
+    </div>
+
+    <!-- Weekly schedule popup -->
+    <div class="modal-backdrop" id="scheduleModal" aria-hidden="true" hidden>
+        <div class="modal-card schedule-card" role="dialog" aria-modal="true" aria-labelledby="scheduleTitle">
+            <button type="button" class="modal-close-btn" id="closeScheduleBtn" aria-label="Close">&times;</button>
+            <h2 class="modal-title" id="scheduleTitle">Your Weekly Schedule</h2>
+            <p class="schedule-sub">Pick a day to load its workout.</p>
+            <div class="schedule-list" id="scheduleList"></div>
+        </div>
+    </div>
+    <!-- ADDED BY TRIO: Change goal popup modal -->
+    <div class="modal-backdrop" id="changeGoalModal" aria-hidden="true" hidden>
+        <div class="modal-card change-plan-modal-card" role="dialog" aria-modal="true" aria-labelledby="changeGoalTitle">
+            <button type="button" class="modal-close-btn" id="closeGoalModalBtn" aria-label="Close">&times;</button>
+            <h2 class="modal-title" id="changeGoalTitle">What is your objective?</h2>
+            <p class="change-plan-sub">Pick your new training goal.</p>
+            <form id="changeGoalForm">
+                <div class="change-plan-grid change-plan-grid--3">
+                    <label class="objective-card-label">
+                        <input type="radio" name="change_objective" value="lose-weight">
+                        <div class="objective-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/goals/lose-weight.png") -->
+                                <img src="images/objective/lose-weight.png" alt="Lose Weight">
+                            </div>
+                            <h3 class="card-title">Lose Weight</h3>
+                        </div>
+                    </label>
+                    <label class="objective-card-label">
+                        <input type="radio" name="change_objective" value="gain-strength">
+                        <div class="objective-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/goals/gain-strength.png") -->
+                                <img src="images/objective/gain-strength.png" alt="Gain Strength">
+                            </div>
+                            <h3 class="card-title">Gain Strength</h3>
+                        </div>
+                    </label>
+                    <label class="objective-card-label">
+                        <input type="radio" name="change_objective" value="gain-muscle">
+                        <div class="objective-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/goals/gain-muscle.png") -->
+                                <img src="images/objective/gain-muscle.png" alt="Gain Muscle">
+                            </div>
+                            <h3 class="card-title">Gain Muscle</h3>
+                        </div>
+                    </label>
+                </div>
+                <button type="submit" class="save-plan-btn">Save Goal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADDED BY TRIO: Change split popup modal -->
+    <div class="modal-backdrop" id="changeSplitModal" aria-hidden="true" hidden>
+        <div class="modal-card change-plan-modal-card" role="dialog" aria-modal="true" aria-labelledby="changeSplitTitle">
+            <button type="button" class="modal-close-btn" id="closeSplitModalBtn" aria-label="Close">&times;</button>
+            <h2 class="modal-title" id="changeSplitTitle">Splits and Frequency</h2>
+            <p class="change-plan-sub">Choose how many days and which split you want to train.</p>
+            <form id="changeSplitForm">
+                <div class="change-plan-grid change-plan-grid--4">
+                    <label class="split-card-label">
+                        <input type="radio" name="change_split" value="full-body">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/full-body.png") -->
+                                <img src="images/splits/3-day.png" alt="Whole Body">
+                            </div>
+                            <h3 class="split-name">Whole Body</h3>
+                            <span class="split-detail">3-Day Split</span>
+                        </div>
+                    </label>
+                    <label class="split-card-label">
+                        <input type="radio" name="change_split" value="upper-lower">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/upper-lower.png") -->
+                                <img src="images/splits/4-day.png" alt="Upper/Lower">
+                            </div>
+                            <h3 class="split-name">Upper/Lower</h3>
+                            <span class="split-detail">4-Day Split</span>
+                        </div>
+                    </label>
+                    <label class="split-card-label">
+                        <input type="radio" name="change_split" value="ppl-hybrid">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/hybrid.png") -->
+                                <img src="images/splits/5-day.png" alt="Push, Pull, Legs + Upper/Lower Hybrid">
+                            </div>
+                            <h3 class="split-name">Push, Pull, Legs + Upper/Lower Hybrid</h3>
+                            <span class="split-detail">5-Day Split</span>
+                            <span class="split-badge">(Recommended)</span>
+                        </div>
+                    </label>
+                    <label class="split-card-label">
+                        <input type="radio" name="change_split" value="ppl">
+                        <div class="split-card">
+                            <div class="radio-indicator"></div>
+                            <div class="card-icon-placeholder" aria-hidden="true">
+                                <!-- REMADE BY GI: Paste image path in src="" (for example. src="images/splits/ppl.png") -->
+                                <img src="images/splits/6-day.png" alt="Push, Pull, Legs">
+                            </div>
+                            <h3 class="split-name">Push, Pull, Legs</h3>
+                            <span class="split-detail">6-Day Split</span>
+                        </div>
+                    </label>
+                </div>
+                <button type="submit" class="save-plan-btn">Save Split</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADDED BY GI: Workout Demo Link Popup Modal -->
+    <div class="modal-backdrop" id="workoutDemoModal" aria-hidden="true" hidden>
+        <div class="modal-card workout-demo-modal-card" role="dialog" aria-modal="true" aria-labelledby="workoutDemoTitle">
+            <button type="button" class="modal-close-btn" id="closeWorkoutDemoBtn" aria-label="Close">&times;</button>
+            <div class="workout-demo-thumb" id="workoutDemoThumb" aria-hidden="true"></div>
+            <h2 class="modal-title workout-demo-title" id="workoutDemoTitle">View Demo?</h2>
+            <p class="workout-demo-sub" id="workoutDemoSub">Would you like to watch the demonstration video for this exercise?</p>
+            <div class="workout-demo-actions">
+                <button type="button" class="workout-demo-btn workout-demo-yes" id="workoutDemoYesBtn">Yes</button>
+                <button type="button" class="workout-demo-btn workout-demo-no" id="workoutDemoNoBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spend XP on cosmetics and Coins on partner vouchers and products in the XPulse reward store.">
+    <meta name="theme-color" content="#230035">
+    <meta property="og:title" content="XPulse | Store">
+    <meta property="og:description" content="Spend XP on cosmetics and Coins on partner vouchers and products in the XPulse reward store.">
+    <meta property="og:type" content="website">
+    <title>XPulse | Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body" data-page="store">
+
+    <!-- Top navigation -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="logo" aria-label="XPulse dashboard">
+            <span class="xp">XP</span><span class="ulse">ULSE</span>
+        </a>
+
+        <nav class="dashboard-nav" aria-label="Main navigation">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="workouts.html" class="nav-link">Workout</a>
+            <a href="store.html" class="nav-link active" aria-current="page">Store</a>
+            <a href="profile.html" class="profile-avatar-btn" aria-label="Profile">
+                <div class="avatar-circle"></div>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Page title and balance -->
+    <section class="dashboard-title-bar store-title-bar">
+        <div class="dashboard-title-container">
+            <h1>Redeem Rewards</h1>
+            <p>Spend XP on cosmetics, redeem Coins for partnered discounts or products.</p>
+        </div>
+
+        <!-- XP and coin balance -->
+        <div class="balance-capsule">
+            <div class="balance-item">
+                <span class="balance-dot dot-xp" aria-hidden="true"></span>
+                <span class="balance-text"><span id="userXpVal">0</span> XP</span>
+            </div>
+            <div class="balance-separator">|</div>
+            <div class="balance-item">
+                <span class="balance-dot dot-coin" aria-hidden="true"></span>
+                <span class="balance-text"><span id="userCoinVal">0</span> Coins</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- XP / Coins tabs -->
+    <div class="store-tabs-strip">
+        <div class="store-tabs-container" role="tablist" aria-label="Store currency">
+            <button type="button" class="store-tab-btn active" id="tabXpBtn" role="tab" aria-selected="true">XP</button>
+            <button type="button" class="store-tab-btn" id="tabCoinsBtn" role="tab" aria-selected="false">Coins</button>
+        </div>
+    </div>
+
+    <!-- Store items -->
+    <main class="store-content" data-requires-auth>
+        
+        <!-- XP items (cosmetics) -->
+        <div class="store-catalog-view" id="xpCatalogView">
+            <section class="store-catalog-row">
+                <!-- Item 1: Burning Border -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="cosmetic-preview-circle border-burning-preview"></div>
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="49" data-name="Burning Border" data-desc="Fire user border cosmetic." data-slot="border" data-cosmetic="border-burning">Buy</button>
+                    </div>
+                    <h3>Burning Border</h3>
+                    <p>Fire user border cosmetic.</p>
+                </div>
+
+                <!-- Item 2: Ice Border -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="cosmetic-preview-circle border-cinnamoroll-preview"></div>
+                        <!-- REMADE BY GI: Update data-name and data-desc to Ice Border -->
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="250" data-name="Ice Border" data-desc="Ice user border cosmetic." data-slot="border" data-cosmetic="border-cinnamoroll">Buy</button>
+                    </div>
+                    <h3>Ice Border</h3>
+                    <p>Ice user border cosmetic.</p>
+                </div>
+
+                <!-- Item 3: Giga Chad Avatar -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="avatar-preview-box avatar-gigachad"></div>
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="300" data-name="Giga Chad Avatar" data-desc="Peak masculinity avatar." data-slot="avatar" data-cosmetic="avatar-gigachad">Buy</button>
+                    </div>
+                    <h3>Giga Chad Avatar</h3>
+                    <p>Peak masculinity avatar.</p>
+                </div>
+
+                <!-- Item 4: Goated Cat Avatar -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="avatar-preview-box avatar-cat"></div>
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="200" data-name="Goated Cat Avatar" data-desc="Majestic cat avatar." data-slot="avatar" data-cosmetic="avatar-cat">Buy</button>
+                    </div>
+                    <h3>Goated Cat Avatar</h3>
+                    <p>Majestic cat avatar.</p>
+                </div>
+            </section>
+
+            <hr class="dashboard-divider">
+
+            <section class="store-catalog-row">
+                <!-- Item 5: Warrior Avatar -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="avatar-preview-box avatar-warrior"></div>
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="250" data-name="Warrior Avatar" data-desc="Muscular fighter avatar." data-slot="avatar" data-cosmetic="avatar-warrior">Buy</button>
+                    </div>
+                    <h3>Warrior Avatar</h3>
+                    <p>Muscular fighter avatar.</p>
+                </div>
+
+                <!-- Item 6: Awakened Avatar -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="avatar-preview-box avatar-awakened"></div>
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="280" data-name="Awakened Avatar" data-desc="The chosen one avatar." data-slot="avatar" data-cosmetic="avatar-awakened">Buy</button>
+                    </div>
+                    <h3>Awakened Avatar</h3>
+                    <p>The chosen one avatar.</p>
+                </div>
+
+                <!-- Item 7: Golden Valley Banner -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <div class="banner-preview-box"></div>
+                        <button type="button" class="buy-btn" data-type="xp" data-cost="180" data-name="Golden Valley Banner" data-desc="A countryside banner." data-slot="banner" data-cosmetic="banner-golden">Buy</button>
+                    </div>
+                    <h3>Golden Valley Banner</h3>
+                    <p>A countryside banner.</p>
+                </div>
+
+                <!-- Empty slot (keeps the grid aligned) -->
+                <div class="store-item-card placeholder-slot" aria-hidden="true"></div>
+            </section>
+        </div>
+
+        <!-- Coin items (vouchers) -->
+        <!-- REMADE BY TRIO: Real-life store reward images wired up to images/SHOP/shop-coins/ -->
+        <div class="store-catalog-view" id="coinsCatalogView" style="display: none;">
+            <section class="store-catalog-row">
+                <!-- Item 1: Gift Card -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/ultimate-gc.png" alt="Ultimate Nutrition Gift Card" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="150" data-name="Ultimate Nutrition Gift Card" data-desc="Gift card for nutrition products.">Buy</button>
+                    </div>
+                    <h3>Ultimate Nutrition Gift Card</h3>
+                    <p>Redeemable gift card for nutrition products.</p>
+                </div>
+
+                <!-- Item 2: Focus Fitness Voucher -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/focus-voucher.png" alt="Focus Fitness Voucher" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="100" data-name="Focus Fitness Voucher" data-desc="Voucher for free entry to any Focus Fitness gym.">Buy</button>
+                    </div>
+                    <h3>Focus Fitness Voucher</h3>
+                    <p>Voucher for free entry to any Focus Fitness gym.</p>
+                </div>
+
+                <!-- Item 3: Whey Protein -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/whey-protein.png" alt="Whey Protein Isolate" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="80" data-name="Whey Protein Isolate" data-desc="Voucher for 30% off Whey Protein Isolate.">Buy</button>
+                    </div>
+                    <h3>Whey Protein Isolate</h3>
+                    <p>Voucher for 30% off Whey Protein Isolate.</p>
+                </div>
+
+                <!-- Item 4: Pre-Workout -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/pre-work-out.png" alt="Pre-Workout" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="75" data-name="Pre-Workout" data-desc="Voucher for 20% off pre-workout.">Buy</button>
+                    </div>
+                    <h3>Pre-Workout</h3>
+                    <p>Voucher for 20% off pre-workout.</p>
+                </div>
+            </section>
+
+            <hr class="dashboard-divider">
+
+            <section class="store-catalog-row">
+                <!-- Item 5: Gym Chalk -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/gym-chalk.png" alt="Gym Chalk" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="50" data-name="Gym Chalk" data-desc="Voucher for 100 grams of gym chalk.">Buy</button>
+                    </div>
+                    <h3>Gym Chalk</h3>
+                    <p>Voucher for 100 grams of gym chalk.</p>
+                </div>
+
+                <!-- Item 6: Shaker Bottle -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/shaker.png" alt="Shaker Bottle" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="60" data-name="Shaker Bottle" data-desc="Voucher for one Protein shaker bottle.">Buy</button>
+                    </div>
+                    <h3>Shaker Bottle</h3>
+                    <p>Voucher for one Protein shaker bottle.</p>
+                </div>
+
+                <!-- Item 7: Creatine Monohydrate -->
+                <div class="store-item-card">
+                    <div class="store-thumb-box">
+                        <img src="images/SHOP/shop-coins/creatine.png" alt="Creatine Monohydrate" class="thumb-placeholder store-item-img">
+                        <button type="button" class="buy-btn" data-type="coin" data-cost="70" data-name="Creatine Monohydrate" data-desc="Voucher for 25% off Creatine Monohydrate.">Buy</button>
+                    </div>
+                    <h3>Creatine Monohydrate</h3>
+                    <p>Voucher for 25% off Creatine Monohydrate.</p>
+                </div>
+
+                <!-- Empty slot (keeps the grid aligned) -->
+                <div class="store-item-card placeholder-slot" aria-hidden="true"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Buy popup -->
+    <div class="modal-backdrop" id="storeModalBackdrop" aria-hidden="true" hidden>
+        
+        <!-- Confirm purchase -->
+        <div class="store-dialog-card" id="storeConfirmCard" role="dialog" aria-modal="true" aria-labelledby="modalItemTitle">
+            <div class="dialog-inner-layout">
+                <div class="dialog-thumb-preview" id="modalThumbContainer"></div>
+
+                <div class="dialog-details-col">
+                    <div class="dialog-header-line">
+                        <h3 class="dialog-item-title" id="modalItemTitle">Ultimate Nutrition...</h3>
+                        <div class="dialog-price-pill">
+                            <span class="coin-symbol">●</span>
+                            <span id="modalItemCost">150 COINS</span>
+                        </div>
+                    </div>
+                    <p class="dialog-item-desc" id="modalItemDesc">Gift card for nutrition products.</p>
+                    
+                    <div class="dialog-actions-row">
+                        <button type="button" class="dialog-btn btn-confirm-buy" id="modalConfirmBuyBtn">Buy</button>
+                        <button type="button" class="dialog-btn btn-cancel-buy" id="modalCancelBuyBtn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchase done -->
+        <div class="store-dialog-card" id="storeSuccessCard" role="dialog" aria-modal="true" aria-labelledby="modalSuccessTitle" style="display: none;">
+            <div class="dialog-inner-layout">
+                <div class="dialog-thumb-preview" id="modalSuccessThumbContainer"></div>
+
+                <div class="dialog-details-col">
+                    <h3 class="dialog-success-title" id="modalSuccessTitle">Successfully Redeemed!</h3>
+                    <p class="dialog-voucher-code" id="modalVoucherCode">JGYU-14AFS-AWEW2</p>
+
+                    <div class="dialog-actions-row success-action-row">
+                        <button type="button" class="dialog-btn btn-exit" id="modalExitBtn">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

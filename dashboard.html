@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="XPulse athlete dashboard: see your body ranks, weight progression and recent workouts.">
+    <meta name="theme-color" content="#230035">
+    <meta property="og:title" content="XPulse | Dashboard">
+    <meta property="og:description" content="XPulse athlete dashboard: see your body ranks, weight progression and recent workouts.">
+    <meta property="og:type" content="website">
+    <title>XPulse | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body" data-page="dashboard">
+    <!-- Top navigation -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="logo" aria-label="XPulse dashboard">
+            <span class="xp">XP</span><span class="ulse">ULSE</span>
+        </a>
+
+        <nav class="dashboard-nav" aria-label="Main navigation">
+            <a href="dashboard.html" class="nav-link active" aria-current="page">Dashboard</a>
+            <a href="workouts.html" class="nav-link">Workout</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="profile.html" class="profile-avatar-btn" aria-label="Profile">
+                <div class="avatar-circle"></div>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Page title -->
+    <section class="dashboard-title-bar">
+        <div class="dashboard-title-container">
+            <h1>Dashboard</h1>
+            <p>Here&rsquo;s how your training is going.</p>
+        </div>
+    </section>
+
+    <!-- Purple strip -->
+    <div class="dashboard-substrip"></div>
+
+    <!-- Dashboard content -->
+    <main class="dashboard-content" data-requires-auth>
+        <!-- Body rank -->
+        <section class="dashboard-section body-rank-section" aria-labelledby="bodyRankHeading">
+            <div class="rank-list-column">
+                <h2 class="section-heading" id="bodyRankHeading">
+                    Body Rank
+                    <button type="button" class="info-circle-btn" id="openRanksModalBtn" aria-label="View body rank tiers" aria-haspopup="dialog">?</button>
+                </h2>
+                <ul class="rank-stats-list" id="rankStatsList">
+                    <li><span class="muscle-label">Chest:</span> <span class="tier-name tier-unranked" data-muscle="chest">Unranked</span></li>
+                    <li><span class="muscle-label">Back:</span> <span class="tier-name tier-unranked" data-muscle="back">Unranked</span></li>
+                    <li><span class="muscle-label">Triceps:</span> <span class="tier-name tier-unranked" data-muscle="triceps">Unranked</span></li>
+                    <li><span class="muscle-label">Biceps:</span> <span class="tier-name tier-unranked" data-muscle="biceps">Unranked</span></li>
+                    <li><span class="muscle-label">Shoulder:</span> <span class="tier-name tier-unranked" data-muscle="shoulder">Unranked</span></li>
+                    <li><span class="muscle-label">Legs:</span> <span class="tier-name tier-unranked" data-muscle="legs">Unranked</span></li>
+                </ul>
+            </div>
+
+            <!-- Body figures (front and back) -->
+            <div class="heatmap-column" id="heatmapContainer">
+                <div class="model-wrapper">
+                    <div class="pixel-figure" role="img" aria-label="Front view body heatmap">
+                        <div class="pixel-head"></div>
+                        <div class="pixel-body-row">
+                            <div class="pixel-arm"><div class="shoulder-red"></div><div class="bicep-yellow"></div><div class="arm-grey"></div></div>
+                            <div class="pixel-torso"><div class="chest-pink"></div><div class="torso-grey"></div></div>
+                            <div class="pixel-arm"><div class="shoulder-red"></div><div class="bicep-yellow"></div><div class="arm-grey"></div></div>
+                        </div>
+                        <div class="pixel-legs-row">
+                            <div class="pixel-leg"></div>
+                            <div class="pixel-leg"></div>
+                        </div>
+                    </div>
+                    <span class="model-caption">Front</span>
+                </div>
+                <div class="model-wrapper">
+                    <div class="pixel-figure" role="img" aria-label="Back view body heatmap">
+                        <div class="pixel-head"></div>
+                        <div class="pixel-body-row">
+                            <div class="pixel-arm"><div class="tricep-purple"></div><div class="arm-grey-lower"></div></div>
+                            <div class="pixel-torso"><div class="back-blue"></div><div class="torso-grey-short"></div></div>
+                            <div class="pixel-arm"><div class="tricep-purple"></div><div class="arm-grey-lower"></div></div>
+                        </div>
+                        <div class="pixel-legs-row">
+                            <div class="pixel-leg"></div>
+                            <div class="pixel-leg"></div>
+                        </div>
+                    </div>
+                    <span class="model-caption">Back</span>
+                </div>
+            </div>
+        </section>
+
+        <hr class="dashboard-divider">
+
+        <!-- Consistency and streaks -->
+        <section class="dashboard-section consistency-section" aria-labelledby="consistencyHeading">
+            <h2 class="section-heading" id="consistencyHeading">Streak</h2>
+
+            <div class="consistency-grid">
+                <div class="streak-card">
+                    <span class="streak-label">Current Streak</span>
+                    <strong class="streak-value" id="streakCurrent">0</strong>
+                    <span class="streak-unit">days</span>
+                </div>
+                <div class="streak-card">
+                    <span class="streak-label">Longest Streak</span>
+                    <strong class="streak-value" id="streakLongest">0</strong>
+                    <span class="streak-unit">days</span>
+                </div>
+                <div class="week-card">
+                    <div class="week-head"><span class="streak-label">This Week</span><span class="week-count" id="weekCount">0 / 0</span></div>
+                    <div class="week-bar" role="progressbar" aria-label="Weekly consistency" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="weekBar"><div class="week-bar-fill" id="weekBarFill"></div></div>
+                    <div class="week-days" id="weekDays"></div>
+                </div>
+            </div>
+            <p class="consistency-note">Rest days don&rsquo;t break your streak &ndash; only missed training days from your split do.</p>
+        </section>
+
+        <hr class="dashboard-divider">
+
+        <!-- Weight logging -->
+        <section class="dashboard-section weight-section" aria-labelledby="weightHeading">
+            <h2 class="section-heading" id="weightHeading">Weight Logging</h2>
+
+            <div class="weight-grid">
+                <div class="weight-card">
+                    <!-- REMADE BY TRIO: Added weight-val-group with kg label to the right of the boxes -->
+                    <div class="weight-rows">
+                        <div class="weight-row">
+                            <span>Weight Before:</span>
+                            <div class="weight-val-group">
+                                <div class="weight-val-box" id="valWeightBefore">--</div>
+                                <span class="weight-unit-label">kg</span>
+                            </div>
+                        </div>
+                        <div class="weight-row">
+                            <span>Weight Now:</span>
+                            <div class="weight-val-group">
+                                <div class="weight-val-box" id="valWeightNow">--</div>
+                                <span class="weight-unit-label">kg</span>
+                            </div>
+                        </div>
+                        <div class="weight-row weight-row--desired">
+                            <div class="desired-label-group">
+                                <span>Desired Weight:</span>
+                                <!-- ADDED BY TRIO: add desired weight button -->
+                                <button type="button" class="set-desired-btn" id="openDesiredModalBtn" aria-label="Set desired weight">+ ADD</button>
+                            </div>
+                            <div class="weight-val-group">
+                                <div class="weight-val-box" id="valWeightDesired">--</div>
+                                <span class="weight-unit-label">kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REMADE BY TRIO: Weigh-in form with human limit bounds -->
+                    <form class="weighin-form" id="weighInForm" novalidate>
+                        <label class="visually-hidden" for="weighInInput">Log a new weigh-in</label>
+                        <input type="number" id="weighInInput" class="weighin-input" placeholder="New weigh-in" min="20" max="350" step="any">
+                        <button type="submit" class="weighin-btn">Log</button>
+                    </form>
+                </div>
+
+                <!-- Weight chart (drawn by script) -->
+                <div class="chart-container" id="weightChartContainer">
+                    <h3 class="weight-history-title">Weight History</h3>
+                    <div class="chart-empty-state">
+                        <p class="empty-chart-text">Log your next weigh-in to begin tracking progress over time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="dashboard-divider">
+
+        <!-- Recent workouts -->
+        <section class="dashboard-section recent-workouts-section" aria-labelledby="recentHeading">
+            <h2 class="section-heading" id="recentHeading">Recent Workouts</h2>
+
+            <div class="workouts-grid" id="workoutsGrid">
+                <div class="empty-workouts-box">
+                    <div class="empty-icon-circle" aria-hidden="true">&#127947;&#65039;</div>
+                    <h3>No workouts recorded yet</h3>
+                    <p>Your logged training sessions, sets, and rep stats will appear here.</p>
+                    <a href="workouts.html" class="start-workout-btn">Log First Workout</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Body rank popup -->
+    <div class="modal-backdrop" id="ranksModal" hidden>
+        <div class="modal-card ranks-card" role="dialog" aria-modal="true" aria-labelledby="ranksModalTitle">
+            <button type="button" class="modal-close-btn" id="closeRanksModalBtn" aria-label="Close">&times;</button>
+            <h2 class="modal-title" id="ranksModalTitle">Body Ranks</h2>
+            <p class="modal-note">Weight range and training intensity for each tier.</p>
+            <div class="rank-head" aria-hidden="true"><span>Tier</span><span>Weight Range</span><span>Intensity</span></div>
+            <div class="ranks-list-container">
+                <div class="rank-row row-pink-diamond">
+                    <div class="rank-badge-icon" aria-hidden="true">&#128142;</div>
+                    <span class="rank-tier-title">Pink Diamond</span>
+                    <span class="rank-range-value">101 lbs +</span>
+                    <span class="intensity-pill intensity-high">High</span>
+                </div>
+                <div class="rank-row row-diamond">
+                    <div class="rank-badge-icon" aria-hidden="true">&#128160;</div>
+                    <span class="rank-tier-title">Diamond</span>
+                    <span class="rank-range-value">81 - 100 lbs</span>
+                    <span class="intensity-pill intensity-high">High</span>
+                </div>
+                <div class="rank-row row-amethyst">
+                    <div class="rank-badge-icon" aria-hidden="true">&#128302;</div>
+                    <span class="rank-tier-title">Amethyst</span>
+                    <span class="rank-range-value">66 - 80 lbs</span>
+                    <span class="intensity-pill intensity-high">High</span>
+                </div>
+                <div class="rank-row row-ruby">
+                    <div class="rank-badge-icon" aria-hidden="true">&#128315;</div>
+                    <span class="rank-tier-title">Ruby</span>
+                    <span class="rank-range-value">51 - 65 lbs</span>
+                    <span class="intensity-pill intensity-medium">Medium</span>
+                </div>
+                <div class="rank-row row-sapphire">
+                    <div class="rank-badge-icon" aria-hidden="true">&#128311;</div>
+                    <span class="rank-tier-title">Sapphire</span>
+                    <span class="rank-range-value">41 - 50 lbs</span>
+                    <span class="intensity-pill intensity-medium">Medium</span>
+                </div>
+                <div class="rank-row row-emerald">
+                    <div class="rank-badge-icon" aria-hidden="true">&#10055;&#65039;</div>
+                    <span class="rank-tier-title">Emerald</span>
+                    <span class="rank-range-value">31 - 40 lbs</span>
+                    <span class="intensity-pill intensity-medium">Medium</span>
+                </div>
+                <div class="rank-row row-gold">
+                    <div class="rank-badge-icon" aria-hidden="true">&#127942;</div>
+                    <span class="rank-tier-title">Gold</span>
+                    <span class="rank-range-value">21 - 30 lbs</span>
+                    <span class="intensity-pill intensity-low">Low</span>
+                </div>
+                <div class="rank-row row-iron">
+                    <div class="rank-badge-icon" aria-hidden="true">&#9876;&#65039;</div>
+                    <span class="rank-tier-title">Iron</span>
+                    <span class="rank-range-value">11 - 20 lbs</span>
+                    <span class="intensity-pill intensity-low">Low</span>
+                </div>
+                <div class="rank-row row-bronze">
+                    <div class="rank-badge-icon" aria-hidden="true">&#128737;&#65039;</div>
+                    <span class="rank-tier-title">Bronze</span>
+                    <span class="rank-range-value">1 - 10 lbs</span>
+                    <span class="intensity-pill intensity-low">Low</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADDED BY TRIO: Desired weight popup modal -->
+    <div class="modal-backdrop" id="desiredWeightModal" aria-hidden="true">
+        <div class="modal-card desired-weight-modal-card" role="dialog" aria-modal="true" aria-labelledby="desiredWeightModalTitle">
+            <button type="button" class="modal-close-btn" id="closeDesiredModalBtn" aria-label="Close">&times;</button>
+            <h2 class="modal-title" id="desiredWeightModalTitle">Set Desired Weight</h2>
+            <p class="desired-modal-sub">Enter your target weight goal to display on your dashboard.</p>
+            <!-- REMADE BY TRIO: Desired weight form with human limit bounds -->
+            <form id="desiredWeightForm" novalidate>
+                <div class="desired-input-wrap">
+                    <input type="number" id="desiredWeightInput" class="desired-weight-input" placeholder="Desired weight" min="20" max="700" step="any" required>
+                    <span class="desired-unit-tag" id="desiredUnitTag">lbs</span>
+                </div>
+                <button type="submit" class="save-desired-btn">Save Desired Weight</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

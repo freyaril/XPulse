@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your XPulse profile: statistics, pinned achievements and milestone rewards to claim.">
+    <meta name="theme-color" content="#230035">
+    <meta property="og:title" content="XPulse | Profile">
+    <meta property="og:description" content="Your XPulse profile: statistics, pinned achievements and milestone rewards to claim.">
+    <meta property="og:type" content="website">
+    <title>XPulse | Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body profile-body" data-page="profile">
+    <!-- Top navigation -->
+    <header class="dashboard-header">
+        <a href="dashboard.html" class="logo" aria-label="XPulse dashboard">
+            <span class="xp">XP</span><span class="ulse">ULSE</span>
+        </a>
+
+        <nav class="dashboard-nav" aria-label="Main navigation">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="workouts.html" class="nav-link">Workout</a>
+            <a href="store.html" class="nav-link">Store</a>
+            <a href="profile.html" class="profile-avatar-btn active" aria-label="Profile">
+                <div class="avatar-circle"></div>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <div class="profile-banner-container">
+        <div class="profile-banner-bg" id="profileBannerBg"></div>
+    </div>
+
+    <!-- Profile content -->
+    <main class="profile-main-content" data-requires-auth>
+        <!-- Avatar -->
+        <div class="profile-avatar-wrapper">
+            <div class="profile-avatar-large" role="img" aria-label="Your profile picture"></div>
+        </div>
+
+        <!-- Name, inventory and statistics -->
+        <section class="profile-top-grid">
+            <div class="profile-left-col">
+                <!-- Name -->
+                <div class="profile-heading-group">
+                    <h1 class="profile-user-title">Hello, <span id="profileUsername"></span>!</h1>
+                    <p class="profile-user-subtitle">Welcome to my profile :D</p>
+                </div>
+
+                <!-- Inventory (drawn by script) -->
+                <div class="profile-inventory-card">
+                    <div class="inventory-card-header">
+                        <h2 class="inventory-title">Inventory</h2>
+                        <span class="inventory-hint">Tap a cosmetic to equip it</span>
+                    </div>
+
+                    <div class="inventory-showcase-grid" id="inventoryGrid"></div>
+
+                    <button type="button" class="inventory-more-btn" id="inventoryMoreBtn" hidden aria-expanded="false">Show more</button>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <aside class="profile-right-col" aria-label="Statistics">
+                <div class="profile-stats-card">
+                    <h2 class="stats-card-title">Statistics</h2>
+
+                    <div class="stats-rows-list">
+                        <div class="stat-pill-row"><span class="stat-label">Weight</span><div class="stat-pill pill-border-dark"><span id="statWeight">-- &gt;&gt; --</span></div></div>
+                        <div class="stat-pill-row"><span class="stat-label">Streak</span><div class="stat-pill pill-border-green"><span id="statStreak">0 days</span></div></div>
+                        <div class="stat-pill-row"><span class="stat-label">XP</span><div class="stat-pill pill-border-purple"><span id="statXp">0</span></div></div>
+                        <div class="stat-pill-row"><span class="stat-label">Coins</span><div class="stat-pill pill-border-yellow"><span id="statCoins">0</span></div></div>
+                    </div>
+
+                    <button type="button" class="logout-btn" id="logoutBtn">Log out</button>
+                </div>
+            </aside>
+        </section>
+
+        <!-- Achievements -->
+        <!-- REMADE BY GI: Achievement cards with distinct reward amounts and image placeholders -->
+        <section class="profile-achievements-container" aria-labelledby="achHeading">
+            <h2 class="achievements-section-title" id="achHeading">Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card" data-ach="0" data-xp="100" data-coins="50">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" (for example. src="images/achievements/first-rep.png") -->
+                        <img src="images/achievement/first-rep.png" alt="First Rep">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>First Rep</h4>
+                        <span class="achieve-desc">Log your first workout</span>
+                        <div class="achieve-action-row" data-xp="100" data-coins="50">
+                            <span class="achieve-reward-badge">+100 XP &middot; +50 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="1" data-xp="150" data-coins="75">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/bench-begginer.png" alt="Bench Beginner">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Bench Beginner</h4>
+                        <span class="achieve-desc">Log a Barbell Bench Press</span>
+                        <div class="achieve-action-row" data-xp="150" data-coins="75">
+                            <span class="achieve-reward-badge">+150 XP &middot; +75 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="2" data-xp="300" data-coins="150">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/three-peat.png" alt="Three-Peat">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Three-Peat</h4>
+                        <span class="achieve-desc">Train 3 days in one week</span>
+                        <div class="achieve-action-row" data-xp="300" data-coins="150">
+                            <span class="achieve-reward-badge">+300 XP &middot; +150 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="3" data-xp="120" data-coins="60">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/weigh-in.png" alt="Weigh-In">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Weigh-In</h4>
+                        <span class="achieve-desc">Log your first weigh-in</span>
+                        <div class="achieve-action-row" data-xp="120" data-coins="60">
+                            <span class="achieve-reward-badge">+120 XP &middot; +60 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="4" data-xp="500" data-coins="250">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/rank-climber.png" alt="Rank Climber">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Rank Climber</h4>
+                        <span class="achieve-desc">Reach Bronze in any muscle</span>
+                        <div class="achieve-action-row" data-xp="500" data-coins="250">
+                            <span class="achieve-reward-badge">+500 XP &middot; +250 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="5" data-xp="750" data-coins="350">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/volume-club.png" alt="Volume Club">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Volume Club</h4>
+                        <span class="achieve-desc">Lift 5,000 kg in total</span>
+                        <div class="achieve-action-row" data-xp="750" data-coins="350">
+                            <span class="achieve-reward-badge">+750 XP &middot; +350 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="6" data-xp="250" data-coins="100">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/shop-smart.png" alt="Shop Smart">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Shop Smart</h4>
+                        <span class="achieve-desc">Redeem your first reward</span>
+                        <div class="achieve-action-row" data-xp="250" data-coins="100">
+                            <span class="achieve-reward-badge">+250 XP &middot; +100 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="7" data-xp="1000" data-coins="500">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/iron-streak.png" alt="Iron Streak">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>Iron Streak</h4>
+                        <span class="achieve-desc">Keep a 7-day streak</span>
+                        <div class="achieve-action-row" data-xp="1000" data-coins="500">
+                            <span class="achieve-reward-badge">+1,000 XP &middot; +500 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="achievement-card" data-ach="8" data-xp="10000" data-coins="10000">
+                    <div class="achievement-icon-thumb" aria-hidden="true">
+                        <!-- REMADE BY GI: Paste image directory in src="" -->
+                        <img src="images/achievement/" alt="GRAHHHHHH">
+                    </div>
+                    <div class="achievement-details">
+                        <h4>LETS GOOO</h4>
+                        <span class="achieve-desc">Present this website.</span>
+                        <div class="achieve-action-row" data-xp="10000" data-coins="10000">
+                            <span class="achieve-reward-badge">+10,000 XP &middot; +10,000 C</span>
+                            <span class="achieve-ongoing-text">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
