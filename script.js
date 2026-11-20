@@ -1831,9 +1831,7 @@
 
     // REMADE BY GI & UPDATED BY US: Initialize achievements with distinct reward values, badges, and 3x3 pagination
     function initProfileAchievements() {
-        // ============================================================
-        // ADDED BY US: 3x3 Achievements Pagination System (9 cards per page)
-        // ============================================================
+        // ADDED BY US:Achievements Pagination 
         const cards = $$('.achievement-card');
         const ITEMS_PER_PAGE = 9;
         const totalPages = Math.ceil(cards.length / ITEMS_PER_PAGE);
