@@ -3523,3 +3523,63 @@ body.modal-open { overflow: hidden; }
     min-width: 20px;
 }
 
+/* ============================================================ */
+/* ADDED BY US: Achievements 3x3 Pagination Styles              */
+/* ============================================================ */
+.achievements-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+.achieve-page-btn {
+    min-width: 2.6rem;
+    height: 2.6rem;
+    padding: 0 0.75rem;
+    border: 1.5px solid #d4d4d8;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #18181b;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.achieve-page-btn:hover:not(:disabled):not(.active) {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.achieve-page-btn.active {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+    cursor: default;
+    font-weight: 900;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.achieve-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: #e4e4e7;
+    background-color: #f4f4f5;
+}
+
+.achieve-page-arrow {
+    font-size: 1.25rem;
+    font-weight: 900;
+    line-height: 1;
+}
+

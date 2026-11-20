@@ -1675,13 +1675,216 @@
 
             case 8: // Pink Diamond / LETS GOOO: Always complete (available to claim)
                 return true;
+
+            case 9: // Chest Starter: Log Chest for the first time
+                return workouts.some((w) => EXERCISE_TO_MUSCLE[w.name] === 'chest');
+
+            case 10: // Back Starter: Log Back for the first time
+                return workouts.some((w) => EXERCISE_TO_MUSCLE[w.name] === 'back');
+
+            case 11: // Shoulder Starter: Log Shoulders for the first time
+                return workouts.some((w) => EXERCISE_TO_MUSCLE[w.name] === 'shoulder');
+
+            case 12: // Arm Starter: Log Arms for the first time
+                return workouts.some((w) => EXERCISE_TO_MUSCLE[w.name] === 'triceps' || EXERCISE_TO_MUSCLE[w.name] === 'biceps');
+
+            case 13: // Leg Starter: Log Legs for the first time
+                return workouts.some((w) => EXERCISE_TO_MUSCLE[w.name] === 'legs');
+
+            case 15: { // Reach Iron in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksI = calculateBodyRanks(workouts);
+                const ironAndAbove = ['iron','gold','emerald','sapphire','ruby','amethyst','diamond','pink-diamond'];
+                return Object.values(ranksI).some((r) => r && r.key && ironAndAbove.includes(r.key));
+            }
+
+            case 16: { // Reach Gold in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksG = calculateBodyRanks(workouts);
+                const goldAndAbove = ['gold','emerald','sapphire','ruby','amethyst','diamond','pink-diamond'];
+                return Object.values(ranksG).some((r) => r && r.key && goldAndAbove.includes(r.key));
+            }
+
+            case 17: { // Reach Emerald in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksE = calculateBodyRanks(workouts);
+                const emeraldAndAbove = ['emerald','sapphire','ruby','amethyst','diamond','pink-diamond'];
+                return Object.values(ranksE).some((r) => r && r.key && emeraldAndAbove.includes(r.key));
+            }
+
+            case 18: { // Reach Sapphire in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksS = calculateBodyRanks(workouts);
+                const sapphireAndAbove = ['sapphire','ruby','amethyst','diamond','pink-diamond'];
+                return Object.values(ranksS).some((r) => r && r.key && sapphireAndAbove.includes(r.key));
+            }
+
+            case 19: { // Reach Ruby in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksR = calculateBodyRanks(workouts);
+                const rubyAndAbove = ['ruby','amethyst','diamond','pink-diamond'];
+                return Object.values(ranksR).some((r) => r && r.key && rubyAndAbove.includes(r.key));
+            }
+
+            case 20: { // Reach Amethyst in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksA = calculateBodyRanks(workouts);
+                const amethystAndAbove = ['amethyst','diamond','pink-diamond'];
+                return Object.values(ranksA).some((r) => r && r.key && amethystAndAbove.includes(r.key));
+            }
+
+            case 21: { // Reach Diamond in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksD = calculateBodyRanks(workouts);
+                const diamondAndAbove = ['diamond','pink-diamond'];
+                return Object.values(ranksD).some((r) => r && r.key && diamondAndAbove.includes(r.key));
+            }
+
+            case 22: { // Reach Pink Diamond in any muscle
+                if (typeof calculateBodyRanks !== 'function') return false;
+                const ranksPD = calculateBodyRanks(workouts);
+                return Object.values(ranksPD).some((r) => r && r.key === 'pink-diamond');
+            }
+
+            // ADDED BY US: New Achievements Verification Logic (IDs 23 - 42)
+
+            case 23: { // Squat King: Accumulate 100 total reps of Barbell Squats
+                const totalReps = workouts
+                    .filter((w) => w.name && w.name.trim().toLowerCase() === 'barbell squat')
+                    .reduce((total, w) => total + (w.sets || []).reduce((sum, s) => sum + (+s.r || 0), 0), 0);
+                return totalReps >= 100;
+            }
+
+            case 24: { // Pull-Up King: Accumulate 100 total reps of Pull-Ups
+                const totalReps = workouts
+                    .filter((w) => w.name && w.name.trim().toLowerCase() === 'pull-up')
+                    .reduce((total, w) => total + (w.sets || []).reduce((sum, s) => sum + (+s.r || 0), 0), 0);
+                return totalReps >= 100;
+            }
+
+            case 25: { // Curl King: Accumulate 100 total reps of Barbell Curls
+                const totalReps = workouts
+                    .filter((w) => w.name && w.name.trim().toLowerCase() === 'barbell curl')
+                    .reduce((total, w) => total + (w.sets || []).reduce((sum, s) => sum + (+s.r || 0), 0), 0);
+                return totalReps >= 100;
+            }
+
+            case 26: { // Calf King: Accumulate 100 total reps of Standing Calf Raises
+                const totalReps = workouts
+                    .filter((w) => w.name && w.name.trim().toLowerCase() === 'standing calf raise')
+                    .reduce((total, w) => total + (w.sets || []).reduce((sum, s) => sum + (+s.r || 0), 0), 0);
+                return totalReps >= 100;
+            }
+
+            case 27: { // Incline King: Accumulate 100 total reps of Dumbbell Incline Press
+                const totalReps = workouts
+                    .filter((w) => w.name && w.name.trim().toLowerCase() === 'dumbbell incline press')
+                    .reduce((total, w) => total + (w.sets || []).reduce((sum, s) => sum + (+s.r || 0), 0), 0);
+                return totalReps >= 100;
+            }
+
+            // ADDED BY US: Workout Difficulty Tiers - Veteran: 10, Master: 25
+            // Legs
+            case 28: // Leg Novice: Log your first Leg workout
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'legs').length >= 1;
+            case 29: // Leg Veteran: Log 10 Leg workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'legs').length >= 10;
+            case 30: // Leg Master: Log 25 Leg workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'legs').length >= 25;
+
+            // Chest
+            case 31: // Chest Novice: Log your first Chest workout
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'chest').length >= 1;
+            case 32: // Chest Veteran: Log 10 Chest workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'chest').length >= 10;
+            case 33: // Chest Master: Log 25 Chest workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'chest').length >= 25;
+
+            // Back
+            case 34: // Back Novice: Log your first Back workout
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'back').length >= 1;
+            case 35: // Back Veteran: Log 10 Back workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'back').length >= 10;
+            case 36: // Back Master: Log 25 Back workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'back').length >= 25;
+
+            // Shoulders
+            case 37: // Shoulder Novice: Log your first Shoulder workout
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'shoulder').length >= 1;
+            case 38: // Shoulder Veteran: Log 10 Shoulder workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'shoulder').length >= 10;
+            case 39: // Shoulder Master: Log 25 Shoulder workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'shoulder').length >= 25;
+
+            // Arms
+            case 40: // Arm Novice: Log your first Arm workout
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'triceps' || EXERCISE_TO_MUSCLE[w.name] === 'biceps').length >= 1;
+            case 41: // Arm Veteran: Log 10 Arm workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'triceps' || EXERCISE_TO_MUSCLE[w.name] === 'biceps').length >= 10;
+            case 42: // Arm Master: Log 25 Arm workouts
+                return workouts.filter((w) => EXERCISE_TO_MUSCLE[w.name] === 'triceps' || EXERCISE_TO_MUSCLE[w.name] === 'biceps').length >= 25;
+
             default:
                 return false;
         }
     }
 
-    // REMADE BY GI: Initialize achievements with distinct reward values and reward badges
+    // REMADE BY GI & UPDATED BY US: Initialize achievements with distinct reward values, badges, and 3x3 pagination
     function initProfileAchievements() {
+        // ============================================================
+        // ADDED BY US: 3x3 Achievements Pagination System (9 cards per page)
+        // ============================================================
+        const cards = $$('.achievement-card');
+        const ITEMS_PER_PAGE = 9;
+        const totalPages = Math.ceil(cards.length / ITEMS_PER_PAGE);
+        let currentPage = 1;
+        const paginationContainer = $('#achievementsPagination');
+
+        function renderPage(page) {
+            currentPage = page;
+            const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIdx = startIdx + ITEMS_PER_PAGE;
+
+            cards.forEach((card, idx) => {
+                card.style.display = (idx >= startIdx && idx < endIdx) ? 'flex' : 'none';
+            });
+
+            if (!paginationContainer) return;
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            // Previous button
+            html += `<button type="button" class="achieve-page-btn achieve-page-arrow" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''} aria-label="Previous page">&lsaquo;</button>`;
+
+            // Page numbers
+            for (let p = 1; p <= totalPages; p++) {
+                html += `<button type="button" class="achieve-page-btn ${p === currentPage ? 'active' : ''}" data-page="${p}" aria-label="Page ${p}" ${p === currentPage ? 'aria-current="page"' : ''}>${p}</button>`;
+            }
+
+            // Next button
+            html += `<button type="button" class="achieve-page-btn achieve-page-arrow" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''} aria-label="Next page">&rsaquo;</button>`;
+
+            paginationContainer.innerHTML = html;
+
+            $$('.achieve-page-btn', paginationContainer).forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const targetPage = +btn.dataset.page;
+                    if (targetPage >= 1 && targetPage <= totalPages && targetPage !== currentPage) {
+                        renderPage(targetPage);
+                        const achSection = $('.profile-achievements-container');
+                        if (achSection) {
+                            achSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+        }
+
+        renderPage(1);
+
         if (!user) return;
         const { wallet, claimed } = user.state;
         const xpEl = $('#statXp'), coinEl = $('#statCoins');
@@ -1693,11 +1896,53 @@
             1: { xp: 150, coins: 75 },      // Bench Beginner: 150 XP, 75 Coins
             2: { xp: 300, coins: 150 },     // Three-Peat: 300 XP, 150 Coins
             3: { xp: 120, coins: 60 },      // Weigh-In: 120 XP, 60 Coins
-            4: { xp: 500, coins: 250 },     // Rank Climber: 500 XP, 250 Coins
+            4: { xp: 180, coins: 50 },      // Rank Climber: 180 XP, 50 Coins 
             5: { xp: 750, coins: 350 },     // Volume Club: 750 XP, 350 Coins
             6: { xp: 250, coins: 100 },     // Shop Smart: 250 XP, 100 Coins
             7: { xp: 1000, coins: 500 },    // Iron Streak: 1,000 XP, 500 Coins
-            8: { xp: 10000, coins: 10000 }  // LETS GOOO: 10,000 XP, 10,000 Coins
+            8: { xp: 10000, coins: 10000 }, // LETS GOOO: 10,000 XP, 10,000 Coins
+            //Log muscle group achievements
+            9:  { xp: 150, coins: 40 },      // Chest Starter: 150 XP, 40 Coins
+            10: { xp: 150, coins: 40 },      // Back Starter: 150 XP, 40 Coins
+            11: { xp: 150, coins: 40 },      // Shoulder Starter: 150 XP, 40 Coins
+            12: { xp: 150, coins: 40 },      // Arm Starter: 150 XP, 40 Coins
+            13: { xp: 150, coins: 40 },      // Leg Starter: 150 XP, 40 Coins
+            //Rank milestone achievements (in any muscle)
+            15: { xp: 200, coins: 65 },      // Reach Iron: 200 XP, 65 Coins
+            16: { xp: 250, coins: 70 },      // Reach Gold: 250 XP, 70 Coins
+            17: { xp: 300, coins: 80 },      // Reach Emerald: 300 XP, 80 Coins
+            18: { xp: 350, coins: 90 },      // Reach Sapphire: 350 XP, 90 Coins
+            19: { xp: 450, coins: 150 },     // Reach Ruby: 450 XP, 150 Coins
+            20: { xp: 480, coins: 200 },     // Reach Amethyst: 480 XP, 200 Coins
+            21: { xp: 550, coins: 250 },     // Reach Diamond: 550 XP, 250 Coins
+            22: { xp: 800, coins: 350 },     // Reach Pink Diamond: 800 XP, 350 Coins
+            //Exercise Rep Milestones (500 XP, 350 Coins)
+            23: { xp: 500, coins: 350 },     // Squat King: 500 XP, 350 Coins
+            24: { xp: 500, coins: 350 },     // Pull-Up King: 500 XP, 350 Coins
+            25: { xp: 500, coins: 350 },     // Curl King: 500 XP, 350 Coins
+            26: { xp: 500, coins: 350 },     // Calf King: 500 XP, 350 Coins
+            27: { xp: 500, coins: 350 },     // Incline King: 500 XP, 350 Coins
+            //Workout Difficulty Tiers (Novice: 120xp 40c, Veteran: 250xp 100c, Master: 500xp 250c)
+            // Legs
+            28: { xp: 120, coins: 40 },      // Leg Novice: 120 XP, 40 Coins
+            29: { xp: 250, coins: 100 },     // Leg Veteran: 250 XP, 100 Coins
+            30: { xp: 500, coins: 250 },     // Leg Master: 500 XP, 250 Coins
+            // Chest
+            31: { xp: 120, coins: 40 },      // Chest Novice: 120 XP, 40 Coins
+            32: { xp: 250, coins: 100 },     // Chest Veteran: 250 XP, 100 Coins
+            33: { xp: 500, coins: 250 },     // Chest Master: 500 XP, 250 Coins
+            // Back
+            34: { xp: 120, coins: 40 },      // Back Novice: 120 XP, 40 Coins
+            35: { xp: 250, coins: 100 },     // Back Veteran: 250 XP, 100 Coins
+            36: { xp: 500, coins: 250 },     // Back Master: 500 XP, 250 Coins
+            // Shoulders
+            37: { xp: 120, coins: 40 },      // Shoulder Novice: 120 XP, 40 Coins
+            38: { xp: 250, coins: 100 },     // Shoulder Veteran: 250 XP, 100 Coins
+            39: { xp: 500, coins: 250 },     // Shoulder Master: 500 XP, 250 Coins
+            // Arms
+            40: { xp: 120, coins: 40 },      // Arm Novice: 120 XP, 40 Coins
+            41: { xp: 250, coins: 100 },     // Arm Veteran: 250 XP, 100 Coins
+            42: { xp: 500, coins: 250 }      // Arm Master: 500 XP, 250 Coins
         };
 
         $$('.achievement-card').forEach((card) => {
@@ -1770,8 +2015,8 @@
         updateDashboardRanks();
     }
 
-    // ADDED BY TRIO: Trigger Profile achievements at the bottom after all constants and functions are initialized
-    if (document.body.dataset.page === 'profile' && user) {
+    // ADDED BY TRIO & UPDATED BY US: Trigger Profile achievements at the bottom after all constants and functions are initialized
+    if (document.body.dataset.page === 'profile') {
         initProfileAchievements();
     }
 
